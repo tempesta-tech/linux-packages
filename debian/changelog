@@ -1,6 +1,8 @@
 linux (4.8.15-tfw1-1) stretch; urgency=medium
 
-  * Patched kernel for TempestaFW
+  * Patched kernel for TempestaFW.
+  * Use SLUB as default SLAB allocator.
+  * Remove certificates used for initial testing of signed modules.
 
  -- Tempeststa Technologies, Inc. <info@tempesta-tech.com>  Wed, 29 Mar 2017 07:22:35 +0500
 
