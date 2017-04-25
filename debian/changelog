@@ -1,3 +1,11 @@
+linux (4.8.15-tfw1-1~bpo8+1) jessie-backports; urgency=medium
+
+  * Patched kernel for TempestaFW.
+  * Use SLUB as default SLAB allocator.
+  * Remove certificates used for initial testing of signed modules.
+
+ -- Tempesta Technologies, Inc. <info@tempesta-tech.com>  Wed, 25 Apr 2017 17:22:35 +0500
+
 linux (4.8.15-2~bpo8+2) jessie-backports; urgency=medium
 
   * debian/control: Revert change to asciidoc build-dependency, which confuses
