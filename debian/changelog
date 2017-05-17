@@ -1,3 +1,9 @@
+linux (4.8.15-tfw2-1~bpo8+1) jessie-backports; urgency=medium
+
+  * Fix chash on skb bulk free
+
+ -- Tempesta Technologies, Inc. <info@tempesta-tech.com>  Tue, 16 May 2017 15:12:11 +0500
+
 linux (4.8.15-tfw1-1~bpo8+1) jessie-backports; urgency=medium
 
   * Patched kernel for TempestaFW.
