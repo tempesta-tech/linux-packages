@@ -27,6 +27,12 @@ CONFIG_ATA=y
 # CONFIG_NIU is not set
 
 ##
+## file: drivers/power/reset/Kconfig
+##
+CONFIG_POWER_RESET=y
+CONFIG_POWER_RESET_SYSCON=y
+
+##
 ## file: drivers/scsi/Kconfig
 ##
 CONFIG_SCSI=y
@@ -54,11 +60,6 @@ CONFIG_USB_OHCI_HCD=m
 ##
 # CONFIG_VGA_CONSOLE is not set
 CONFIG_FRAMEBUFFER_CONSOLE=y
-
-##
-## file: drivers/video/fbdev/Kconfig
-##
-CONFIG_FB=y
 
 ##
 ## file: init/Kconfig
