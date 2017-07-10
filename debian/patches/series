@@ -110,21 +110,21 @@ bugfix/all/tracing-Use-strlcpy-instead-of-strcpy-in-__trace_fin.patch
 bugfix/all/sunrpc-refactor-svc_set_num_threads.patch
 bugfix/all/nfsv4-fix-callback-server-shutdown.patch
 bugfix/all/nfsv4.x-callback-create-the-callback-service-through.patch
-bugfix/all/ipv6-prevent-overrun-when-parsing-v6-header-options.patch
-bugfix/all/ipv6-check-ip6_find_1stfragopt-return-value-properly.patch
-bugfix/all/ipv6-xfrm-handle-errors-reported-by-xfrm6_find_1stfr.patch
-bugfix/all/ipv6-fix-leak-in-ipv6_gso_segment.patch
-bugfix/all/sctp-do-not-inherit-ipv6_-mc-ac-fl-_list-from-parent.patch
-bugfix/all/ipv6-dccp-do-not-inherit-ipv6_mc_list-from-parent.patch
-bugfix/all/crypto-skcipher-Add-missing-api-setkey-checks.patch
-bugfix/all/ipv6-fix-out-of-bound-writes-in-__ip6_append_data.patch
-bugfix/all/mm-larger-stack-guard-gap-between-vmas.patch
-bugfix/all/mm-fix-new-crash-in-unmapped_area_topdown.patch
+#bugfix/all/ipv6-prevent-overrun-when-parsing-v6-header-options.patch
+#bugfix/all/ipv6-check-ip6_find_1stfragopt-return-value-properly.patch
+#bugfix/all/ipv6-xfrm-handle-errors-reported-by-xfrm6_find_1stfr.patch
+#bugfix/all/ipv6-fix-leak-in-ipv6_gso_segment.patch
+#bugfix/all/sctp-do-not-inherit-ipv6_-mc-ac-fl-_list-from-parent.patch
+#bugfix/all/ipv6-dccp-do-not-inherit-ipv6_mc_list-from-parent.patch
+#bugfix/all/crypto-skcipher-Add-missing-api-setkey-checks.patch
+#bugfix/all/ipv6-fix-out-of-bound-writes-in-__ip6_append_data.patch
+#bugfix/all/mm-larger-stack-guard-gap-between-vmas.patch
+#bugfix/all/mm-fix-new-crash-in-unmapped_area_topdown.patch
 
 # Fix exported symbol versions
 bugfix/ia64/revert-ia64-move-exports-to-definitions.patch
 bugfix/sparc/revert-sparc-move-exports-to-definitions.patch
-bugfix/s390/revert-s390-move-exports-to-definitions.patch
+#bugfix/s390/revert-s390-move-exports-to-definitions.patch
 bugfix/m68k/revert-m68k-move-exports-to-definitions.patch
 bugfix/alpha/revert-alpha-move-exports-to-actual-definitions.patch
 bugfix/powerpc/powerpc-remove-mac-on-linux-hooks.patch
