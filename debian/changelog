@@ -1,3 +1,9 @@
+linux (4.9.35-tfw4-1) stretch; urgency=medium
+
+  * New upstream release
+
+ -- Tempeststa Technologies, Inc. <info@tempesta-tech.com>  Tue, 23 Jan 2018 08:58:30 +0500
+
 linux (4.9.30-2+deb9u2) stretch-security; urgency=high
 
   * Revert changes in version 4.9.30-2+deb9u1 (Closes: #865303)
