@@ -7,31 +7,31 @@ Forwarded: not-needed
 
 --- a/.gitignore
 +++ b/.gitignore
-@@ -53,23 +53,11 @@ Module.symvers
- /Module.markers
- 
+@@ -60,23 +60,11 @@ modules.builtin
  #
+ /*.spec
+ 
+-#
 -# Debian directory (make deb-pkg)
 -#
 -/debian/
 -
--#
+ #
  # tar directory (make tar*-pkg)
  #
  /tar-install/
  
- #
+-#
 -# git files that we don't want to ignore even if they are dot-files
 -#
 -!.gitignore
 -!.mailmap
 -!.cocciconfig
 -
--#
+ #
  # Generated include files
  #
- include/config
-@@ -114,3 +102,10 @@ all.config
+@@ -122,3 +110,10 @@ all.config
  
  # Kdevelop4
  *.kdev4

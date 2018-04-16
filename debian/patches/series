@@ -82,7 +82,6 @@ bugfix/all/i40e-i40evf-organize-and-re-number-feature-flags.patch
 bugfix/all/i40e-fix-flags-declaration.patch
 bugfix/all/xen-time-do-not-decrease-steal-time-after-live-migra.patch
 debian/revert-objtool-fix-config_stack_validation-y-warning.patch
-bugfix/all/crypto-ecc-fix-null-pointer-deref.-on-no-default_rng.patch
 
 # Miscellaneous features
 
@@ -118,10 +117,6 @@ features/all/lockdown/arm64-add-kernel-config-option-to-lock-down-when.patch
 
 # Security fixes
 debian/i386-686-pae-pci-set-pci-nobios-by-default.patch
-bugfix/all/dccp-cve-2017-8824-use-after-free-in-dccp-code.patch
-bugfix/all/media-dvb-usb-v2-lmedm04-Improve-logic-checking-of-w.patch
-bugfix/all/media-dvb-usb-v2-lmedm04-move-ts2020-attach-to-dm04_.patch
-bugfix/all/media-hdpvr-fix-an-error-handling-path-in-hdpvr_prob.patch
 
 # Fix exported symbol versions
 bugfix/all/module-disable-matching-missing-version-crc.patch
