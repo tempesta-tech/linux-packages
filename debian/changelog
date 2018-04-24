@@ -1,3 +1,9 @@
+linux (4.14.32-tfw1-1~bpo9+1) stretch-backports; urgency=medium
+
+  * Update to linux 4.14.32
+
+ -- Tempeststa Technologies, Inc. <info@tempesta-tech.com>  Mon, 16 Apr 2018 11:28:42 +0500
+
 linux (4.14.17-1~bpo9+1) stretch-backports; urgency=medium
 
   * Rebuild for stretch-backports:
