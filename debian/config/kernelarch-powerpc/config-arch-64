@@ -24,7 +24,6 @@ CONFIG_KVM_XICS=y
 ##
 CONFIG_RTAS_PROC=y
 CONFIG_RTAS_FLASH=m
-CONFIG_IBMEBUS=y
 
 ##
 ## file: arch/powerpc/platforms/Kconfig.cputype
@@ -73,6 +72,11 @@ CONFIG_CRYPTO_DEV_VMX=y
 ## file: drivers/crypto/vmx/Kconfig
 ##
 CONFIG_CRYPTO_DEV_VMX_ENCRYPT=m
+
+##
+## file: drivers/gpu/drm/Kconfig
+##
+CONFIG_DRM_AMDGPU=m
 
 ##
 ## file: drivers/gpu/drm/ast/Kconfig

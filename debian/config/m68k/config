@@ -90,6 +90,11 @@ CONFIG_SYSV68_PARTITION=y
 # CONFIG_ACCESSIBILITY is not set
 
 ##
+## file: drivers/ata/Kconfig
+##
+CONFIG_PATA_FALCON=m
+
+##
 ## file: drivers/bcma/Kconfig
 ##
 # CONFIG_BCMA is not set
@@ -103,7 +108,6 @@ CONFIG_ATARI_FLOPPY=m
 CONFIG_BLK_DEV_SWIM=m
 CONFIG_AMIGA_Z2RAM=y
 CONFIG_CDROM_PKTCDVD=m
-# CONFIG_BLK_DEV_HD is not set
 # CONFIG_BLK_DEV_RBD is not set
 
 ##
@@ -304,7 +308,6 @@ CONFIG_SERIO_LIBPS2=y
 ##
 CONFIG_ADB=y
 CONFIG_ADB_MACII=y
-# CONFIG_ADB_MACIISI is not set
 #. switched on for the benefit of IIfx, Q900, Q950
 CONFIG_ADB_IOP=y
 CONFIG_ADB_PMU68K=y
@@ -557,11 +560,6 @@ CONFIG_SERIAL_8250_RUNTIME_UARTS=4
 # CONFIG_BACKLIGHT_LCD_SUPPORT is not set
 
 ##
-## file: drivers/video/console/Kconfig
-##
-CONFIG_FRAMEBUFFER_CONSOLE=y
-
-##
 ## file: drivers/video/fbdev/Kconfig
 ##
 # CONFIG_FIRMWARE_EDID is not set
@@ -738,7 +736,6 @@ CONFIG_HZ_PERIODIC=y
 # CONFIG_DEBUG_FS is not set
 # CONFIG_FRAME_POINTER is not set
 # CONFIG_SCHED_DEBUG is not set
-# CONFIG_TIMER_STATS is not set
 
 ##
 ## file: mm/Kconfig
@@ -802,11 +799,6 @@ CONFIG_IPV6=m
 ## file: net/ipx/Kconfig
 ##
 CONFIG_IPX=m
-
-##
-## file: net/irda/Kconfig
-##
-# CONFIG_IRDA is not set
 
 ##
 ## file: net/lapb/Kconfig

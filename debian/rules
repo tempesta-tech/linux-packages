@@ -16,11 +16,6 @@ ifdef DEBIAN_KERNEL_JOBS
   MAKEFLAGS += -j$(DEBIAN_KERNEL_JOBS)
 endif
 BUILD_STAGE1 := $(filter stage1,$(DEB_BUILD_PROFILES))
-ifneq (,$(filter nodoc,$(DEB_BUILD_PROFILES)))
-# This only disables building the linux-doc and linux-manual packages.
-# The rules for tools packages check separately for the 'nodoc' profile.
-  MAKEFLAGS += DO_DOCS=False
-endif
 ifneq (,$(filter pkg.linux.notools,$(DEB_BUILD_PROFILES)))
   MAKEFLAGS += DO_TOOLS=False
 endif
@@ -68,10 +63,6 @@ endif
 DIR_ORIG = ../orig/$(SOURCE)-$(VERSION_UPSTREAM)
 TAR_ORIG_NAME = $(SOURCE)_$(VERSION_UPSTREAM).orig.tar.xz
 TAR_ORIG = $(firstword $(wildcard ../$(TAR_ORIG_NAME)) $(wildcard ../orig/$(TAR_ORIG_NAME)))
-
-get-orig-source:
-	@echo "Downloading orig tarball..."
-	uscan --verbose --force-download
 
 orig: $(DIR_ORIG)
 	rsync --delete --exclude /debian --exclude .svk --exclude .svn --exclude .git --link-dest=$(DIR_ORIG)/ -a $(DIR_ORIG)/ .

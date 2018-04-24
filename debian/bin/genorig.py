@@ -101,12 +101,7 @@ class Main(object):
         if subprocess.Popen(cmdline).wait():
             raise RuntimeError("Can't extract tarball")
 
-        # Github packs tarballs as %repo-name%-%requested-treeish%
-        # TODO: remove replacement from here and setup repo name in toplevel
-        # scripts.
-        unpacked_dir = os.path.join(self.dir, match.group('dir').replace('linux', 'linux-4.9.35-tfw'))
-
-        os.rename(unpacked_dir, os.path.join(self.dir, self.orig))
+        os.rename(os.path.join(self.dir, match.group('dir')), os.path.join(self.dir, self.orig))
 
     def upstream_patch(self, input_patch):
         self.log("Patching source with %s\n" % input_patch)
