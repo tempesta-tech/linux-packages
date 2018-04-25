@@ -104,7 +104,7 @@ class Main(object):
         # Github packs tarballs as %repo-name%-%requested-treeish%
         # TODO: remove replacement from here and setup repo name in toplevel
         # scripts.
-        unpacked_dir = os.path.join(self.dir, match.group('dir').replace('linux', 'linux-4.9.35-tfw'))
+        unpacked_dir = os.path.join(self.dir, match.group('dir').replace('linux', 'linux-4.14.32-tfw'))
 
         os.rename(unpacked_dir, os.path.join(self.dir, self.orig))
 

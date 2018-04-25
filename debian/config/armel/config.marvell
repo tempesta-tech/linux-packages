@@ -6,6 +6,7 @@
 CONFIG_CC_STACKPROTECTOR_REGULAR=y
 # CONFIG_CC_STACKPROTECTOR_STRONG is not set
 ## end choice
+# CONFIG_STRICT_KERNEL_RWX is not set
 
 ##
 ## file: arch/arm/Kconfig
@@ -63,7 +64,6 @@ CONFIG_MACH_KUROBOX_PRO=y
 CONFIG_MACH_TS209=y
 CONFIG_MACH_TERASTATION_PRO2=y
 CONFIG_MACH_LINKSTATION_PRO=y
-CONFIG_MACH_LINKSTATION_LSCHL=y
 CONFIG_MACH_LINKSTATION_MINI=y
 CONFIG_MACH_LINKSTATION_LS_HGL=y
 CONFIG_MACH_TS409=y
@@ -90,6 +90,7 @@ CONFIG_ARM_THUMB=y
 ## file: block/Kconfig.iosched
 ##
 CONFIG_IOSCHED_DEADLINE=m
+CONFIG_MQ_IOSCHED_DEADLINE=m
 
 ##
 ## file: block/partitions/Kconfig
@@ -181,6 +182,11 @@ CONFIG_SATA_MV=m
 # CONFIG_ATA_GENERIC is not set
 
 ##
+## file: drivers/base/Kconfig
+##
+CONFIG_FW_LOADER=m
+
+##
 ## file: drivers/bluetooth/Kconfig
 ##
 # CONFIG_BT_HCIUART is not set
@@ -188,6 +194,11 @@ CONFIG_BT_HCIBCM203X=m
 CONFIG_BT_HCIBPA10X=m
 CONFIG_BT_HCIBFUSB=m
 CONFIG_BT_HCIVHCI=m
+
+##
+## file: drivers/connector/Kconfig
+##
+CONFIG_CONNECTOR=m
 
 ##
 ## file: drivers/cpuidle/Kconfig
@@ -224,6 +235,7 @@ CONFIG_MV_XOR=y
 ##
 ## file: drivers/hwmon/Kconfig
 ##
+CONFIG_HWMON=m
 CONFIG_SENSORS_G760A=m
 CONFIG_SENSORS_G762=m
 CONFIG_SENSORS_GPIO_FAN=m
@@ -239,6 +251,11 @@ CONFIG_I2C_CHARDEV=y
 ## file: drivers/i2c/busses/Kconfig
 ##
 CONFIG_I2C_MV64XXX=y
+
+##
+## file: drivers/input/Kconfig
+##
+CONFIG_INPUT_MOUSEDEV=m
 
 ##
 ## file: drivers/input/gameport/Kconfig
@@ -323,7 +340,7 @@ CONFIG_LEDS_TRIGGER_DEFAULT_ON=y
 CONFIG_MMC=m
 
 ##
-## file: drivers/mmc/card/Kconfig
+## file: drivers/mmc/core/Kconfig
 ##
 CONFIG_MMC_BLOCK=m
 
@@ -339,8 +356,8 @@ CONFIG_MTD=y
 # CONFIG_MTD_REDBOOT_PARTS is not set
 CONFIG_MTD_CMDLINE_PARTS=y
 # CONFIG_MTD_AFS_PARTS is not set
-CONFIG_MTD_OF_PARTS=y
-CONFIG_MTD_BLOCK=y
+CONFIG_MTD_OF_PARTS=m
+CONFIG_MTD_BLOCK=m
 CONFIG_FTL=m
 CONFIG_NFTL=m
 # CONFIG_NFTL_RW is not set
@@ -352,8 +369,8 @@ CONFIG_NFTL=m
 ##
 ## file: drivers/mtd/chips/Kconfig
 ##
-CONFIG_MTD_CFI=y
-CONFIG_MTD_JEDECPROBE=y
+CONFIG_MTD_CFI=m
+CONFIG_MTD_JEDECPROBE=m
 CONFIG_MTD_CFI_ADV_OPTIONS=y
 ## choice: Flash cmd/query data swapping
 CONFIG_MTD_CFI_NOSWAP=y
@@ -373,9 +390,9 @@ CONFIG_MTD_CFI_I4=y
 # CONFIG_MTD_CFI_I8 is not set
 # CONFIG_MTD_OTP is not set
 #. Needed e.g. on QNAP devices
-CONFIG_MTD_CFI_INTELEXT=y
+CONFIG_MTD_CFI_INTELEXT=m
 #. Needed e.g. on D-Link DNS-323, Buffalo KuroBox-Pro, Buffalo Linkstation LS-GL / LS-WTGL, etc
-CONFIG_MTD_CFI_AMDSTD=y
+CONFIG_MTD_CFI_AMDSTD=m
 CONFIG_MTD_CFI_STAA=m
 # CONFIG_MTD_RAM is not set
 # CONFIG_MTD_ROM is not set
@@ -394,7 +411,7 @@ CONFIG_MTD_CFI_STAA=m
 ## file: drivers/mtd/maps/Kconfig
 ##
 # CONFIG_MTD_COMPLEX_MAPPINGS is not set
-CONFIG_MTD_PHYSMAP_OF=y
+CONFIG_MTD_PHYSMAP_OF=m
 # CONFIG_MTD_IMPA7 is not set
 # CONFIG_MTD_INTEL_VR_NOR is not set
 # CONFIG_MTD_PLATRAM is not set
@@ -402,10 +419,10 @@ CONFIG_MTD_PHYSMAP_OF=y
 ##
 ## file: drivers/mtd/nand/Kconfig
 ##
-CONFIG_MTD_NAND=y
+CONFIG_MTD_NAND=m
 # CONFIG_MTD_NAND_DISKONCHIP is not set
 # CONFIG_MTD_NAND_CAFE is not set
-CONFIG_MTD_NAND_ORION=y
+CONFIG_MTD_NAND_ORION=m
 
 ##
 ## file: drivers/mtd/onenand/Kconfig
@@ -499,8 +516,14 @@ CONFIG_PCI_MVEBU=y
 ##
 ## file: drivers/pci/pcie/Kconfig
 ##
+# CONFIG_PCIEASPM is not set
 # CONFIG_PCIE_DPC is not set
 # CONFIG_PCIE_PTM is not set
+
+##
+## file: drivers/pci/pcie/aer/Kconfig
+##
+# CONFIG_PCIEAER is not set
 
 ##
 ## file: drivers/pcmcia/Kconfig
@@ -524,11 +547,12 @@ CONFIG_REGULATOR_FIXED_VOLTAGE=y
 ##
 ## file: drivers/rtc/Kconfig
 ##
-CONFIG_RTC_DRV_DS1307=y
-CONFIG_RTC_DRV_RS5C372=y
-CONFIG_RTC_DRV_PCF8563=y
-CONFIG_RTC_DRV_M41T80=y
-CONFIG_RTC_DRV_S35390A=y
+# CONFIG_RTC_NVMEM is not set
+CONFIG_RTC_DRV_DS1307=m
+CONFIG_RTC_DRV_RS5C372=m
+CONFIG_RTC_DRV_PCF8563=m
+CONFIG_RTC_DRV_M41T80=m
+CONFIG_RTC_DRV_S35390A=m
 CONFIG_RTC_DRV_MV=y
 
 ##
@@ -608,6 +632,7 @@ CONFIG_FB_XGI=m
 ##
 ## file: drivers/thermal/Kconfig
 ##
+CONFIG_THERMAL=m
 CONFIG_KIRKWOOD_THERMAL=m
 
 ##
@@ -615,6 +640,8 @@ CONFIG_KIRKWOOD_THERMAL=m
 ##
 CONFIG_SERIAL_8250=y
 CONFIG_SERIAL_8250_CONSOLE=y
+CONFIG_SERIAL_8250_PCI=m
+CONFIG_SERIAL_8250_EXAR=m
 CONFIG_SERIAL_8250_NR_UARTS=4
 CONFIG_SERIAL_8250_RUNTIME_UARTS=2
 # CONFIG_SERIAL_8250_EXTENDED is not set
@@ -644,10 +671,22 @@ CONFIG_USB_UHCI_HCD=m
 CONFIG_USB_SL811_HCD=m
 
 ##
+## file: drivers/usb/misc/Kconfig
+##
+#. Selects BACKLIGHT_CLASS_DEVICE which is always built-in
+# CONFIG_USB_APPLEDISPLAY is not set
+
+##
+## file: drivers/video/backlight/Kconfig
+##
+# CONFIG_BACKLIGHT_CLASS_DEVICE is not set
+
+##
 ## file: drivers/video/console/Kconfig
 ##
 # CONFIG_VGA_CONSOLE is not set
-CONFIG_FRAMEBUFFER_CONSOLE=m
+#. We want to enable this as a module, but that's not currently possible
+# CONFIG_FRAMEBUFFER_CONSOLE is not set
 
 ##
 ## file: drivers/video/fbdev/Kconfig
@@ -669,6 +708,11 @@ CONFIG_ORION_WATCHDOG=m
 ## file: fs/Kconfig
 ##
 # CONFIG_FS_DAX is not set
+
+##
+## file: fs/nls/Kconfig
+##
+CONFIG_NLS=m
 
 ##
 ## file: fs/notify/fanotify/Kconfig
@@ -702,6 +746,7 @@ CONFIG_CC_OPTIMIZE_FOR_SIZE=y
 # CONFIG_FUNCTION_GRAPH_TRACER is not set
 # CONFIG_FTRACE_SYSCALLS is not set
 # CONFIG_STACK_TRACER is not set
+# CONFIG_UPROBE_EVENTS is not set
 
 ##
 ## file: lib/Kconfig.debug
@@ -751,6 +796,8 @@ CONFIG_ROSE=m
 ## file: net/ipv6/Kconfig
 ##
 CONFIG_IPV6=m
+#. Can be modular, but selects LWTUNNEL which cannot
+# CONFIG_IPV6_ILA is not set
 
 ##
 ## file: net/l3mdev/Kconfig
@@ -763,9 +810,14 @@ CONFIG_IPV6=m
 # CONFIG_NET_MPLS_GSO is not set
 
 ##
-## file: security/integrity/ima/Kconfig
+## file: net/packet/Kconfig
 ##
-# CONFIG_IMA is not set
+CONFIG_PACKET=m
+
+##
+## file: security/integrity/Kconfig
+##
+# CONFIG_INTEGRITY is not set
 
 ##
 ## file: sound/soc/Kconfig

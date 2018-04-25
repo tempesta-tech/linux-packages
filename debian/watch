@@ -3,5 +3,5 @@ version=3
 
 # Tempesta kernel is hosted on GitHub
 opts="filenamemangle=s%(?:.*?)?v?(\d[\d.]*-tfw\d+)\.tar\.gz%linux-$1.tar.gz%" \
-   https://github.com/tempesta-tech/linux-4.9.35-tfw/tags \
+   https://github.com/tempesta-tech/linux-4.14.32-tfw/tags \
    (?:.*?/)?v?(\d[\d.]*-tfw\d+)\.tar\.gz debian debian/bin/uscan-hook

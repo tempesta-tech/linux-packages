@@ -1,7 +1,7 @@
 From: Thomas Gleixner <tglx@linutronix.de>
 Date: Fri, 18 Mar 2011 09:18:52 +0100
 Subject: buffer_head: Replace bh_uptodate_lock for -rt
-Origin: https://www.kernel.org/pub/linux/kernel/projects/rt/4.9/older/patches-4.9.30-rt20.tar.xz
+Origin: https://www.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patches-4.14.15-rt13.tar.xz
 
 Wrap the bit_spin_lock calls into a separate inline and add the RT
 replacements with a real spinlock.
@@ -9,13 +9,15 @@ replacements with a real spinlock.
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 ---
  fs/buffer.c                 |   21 +++++++--------------
+ fs/ext4/page-io.c           |    6 ++----
  fs/ntfs/aops.c              |   10 +++-------
+ fs/xfs/xfs_aops.c           |    6 ++----
  include/linux/buffer_head.h |   34 ++++++++++++++++++++++++++++++++++
- 3 files changed, 44 insertions(+), 21 deletions(-)
+ 5 files changed, 48 insertions(+), 29 deletions(-)
 
 --- a/fs/buffer.c
 +++ b/fs/buffer.c
-@@ -301,8 +301,7 @@ static void end_buffer_async_read(struct
+@@ -302,8 +302,7 @@ static void end_buffer_async_read(struct
  	 * decide that the page is now completely done.
  	 */
  	first = page_buffers(page);
@@ -25,7 +27,7 @@ Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
  	clear_buffer_async_read(bh);
  	unlock_buffer(bh);
  	tmp = bh;
-@@ -315,8 +314,7 @@ static void end_buffer_async_read(struct
+@@ -316,8 +315,7 @@ static void end_buffer_async_read(struct
  		}
  		tmp = tmp->b_this_page;
  	} while (tmp != bh);
@@ -35,7 +37,7 @@ Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
  
  	/*
  	 * If none of the buffers had errors and they are all
-@@ -328,9 +326,7 @@ static void end_buffer_async_read(struct
+@@ -329,9 +327,7 @@ static void end_buffer_async_read(struct
  	return;
  
  still_busy:
@@ -74,7 +76,7 @@ Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
  }
  EXPORT_SYMBOL(end_buffer_async_write);
  
-@@ -3383,6 +3375,7 @@ struct buffer_head *alloc_buffer_head(gf
+@@ -3417,6 +3409,7 @@ struct buffer_head *alloc_buffer_head(gf
  	struct buffer_head *ret = kmem_cache_zalloc(bh_cachep, gfp_flags);
  	if (ret) {
  		INIT_LIST_HEAD(&ret->b_assoc_buffers);
@@ -82,9 +84,31 @@ Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
  		preempt_disable();
  		__this_cpu_inc(bh_accounting.nr);
  		recalc_bh_state();
+--- a/fs/ext4/page-io.c
++++ b/fs/ext4/page-io.c
+@@ -95,8 +95,7 @@ static void ext4_finish_bio(struct bio *
+ 		 * We check all buffers in the page under BH_Uptodate_Lock
+ 		 * to avoid races with other end io clearing async_write flags
+ 		 */
+-		local_irq_save(flags);
+-		bit_spin_lock(BH_Uptodate_Lock, &head->b_state);
++		flags = bh_uptodate_lock_irqsave(head);
+ 		do {
+ 			if (bh_offset(bh) < bio_start ||
+ 			    bh_offset(bh) + bh->b_size > bio_end) {
+@@ -108,8 +107,7 @@ static void ext4_finish_bio(struct bio *
+ 			if (bio->bi_status)
+ 				buffer_io_error(bh);
+ 		} while ((bh = bh->b_this_page) != head);
+-		bit_spin_unlock(BH_Uptodate_Lock, &head->b_state);
+-		local_irq_restore(flags);
++		bh_uptodate_unlock_irqrestore(head, flags);
+ 		if (!under_io) {
+ #ifdef CONFIG_EXT4_FS_ENCRYPTION
+ 			if (data_page)
 --- a/fs/ntfs/aops.c
 +++ b/fs/ntfs/aops.c
-@@ -107,8 +107,7 @@ static void ntfs_end_buffer_async_read(s
+@@ -108,8 +108,7 @@ static void ntfs_end_buffer_async_read(s
  				"0x%llx.", (unsigned long long)bh->b_blocknr);
  	}
  	first = page_buffers(page);
@@ -94,7 +118,7 @@ Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
  	clear_buffer_async_read(bh);
  	unlock_buffer(bh);
  	tmp = bh;
-@@ -123,8 +122,7 @@ static void ntfs_end_buffer_async_read(s
+@@ -124,8 +123,7 @@ static void ntfs_end_buffer_async_read(s
  		}
  		tmp = tmp->b_this_page;
  	} while (tmp != bh);
@@ -104,7 +128,7 @@ Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
  	/*
  	 * If none of the buffers had errors then we can set the page uptodate,
  	 * but we first have to perform the post read mst fixups, if the
-@@ -159,9 +157,7 @@ static void ntfs_end_buffer_async_read(s
+@@ -160,9 +158,7 @@ static void ntfs_end_buffer_async_read(s
  	unlock_page(page);
  	return;
  still_busy:
@@ -115,9 +139,31 @@ Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
  }
  
  /**
+--- a/fs/xfs/xfs_aops.c
++++ b/fs/xfs/xfs_aops.c
+@@ -120,8 +120,7 @@ xfs_finish_page_writeback(
+ 	ASSERT(bvec->bv_offset + bvec->bv_len <= PAGE_SIZE);
+ 	ASSERT((bvec->bv_len & (i_blocksize(inode) - 1)) == 0);
+ 
+-	local_irq_save(flags);
+-	bit_spin_lock(BH_Uptodate_Lock, &head->b_state);
++	flags = bh_uptodate_lock_irqsave(head);
+ 	do {
+ 		if (off >= bvec->bv_offset &&
+ 		    off < bvec->bv_offset + bvec->bv_len) {
+@@ -143,8 +142,7 @@ xfs_finish_page_writeback(
+ 		}
+ 		off += bh->b_size;
+ 	} while ((bh = bh->b_this_page) != head);
+-	bit_spin_unlock(BH_Uptodate_Lock, &head->b_state);
+-	local_irq_restore(flags);
++	bh_uptodate_unlock_irqrestore(head, flags);
+ 
+ 	if (!busy)
+ 		end_page_writeback(bvec->bv_page);
 --- a/include/linux/buffer_head.h
 +++ b/include/linux/buffer_head.h
-@@ -75,8 +75,42 @@ struct buffer_head {
+@@ -76,8 +76,42 @@ struct buffer_head {
  	struct address_space *b_assoc_map;	/* mapping this buffer is
  						   associated with */
  	atomic_t b_count;		/* users using this buffer_head */

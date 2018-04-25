@@ -14,11 +14,6 @@ CONFIG_PARISC_PAGE_SIZE_4KB=y
 ## end choice
 
 ##
-## file: arch/parisc/Kconfig.debug
-##
-# CONFIG_DEBUG_RODATA is not set
-
-##
 ## file: block/partitions/Kconfig
 ##
 # CONFIG_PARTITION_ADVANCED is not set
@@ -33,7 +28,6 @@ CONFIG_PATA_LEGACY=m
 ## file: drivers/block/Kconfig
 ##
 # CONFIG_BLK_DEV_FD is not set
-# CONFIG_BLK_CPQ_CISS_DA is not set
 # CONFIG_BLK_DEV_DAC960 is not set
 # CONFIG_BLK_DEV_UMEM is not set
 # CONFIG_BLK_DEV_SX8 is not set
@@ -419,7 +413,6 @@ CONFIG_RTC_DRV_GENERIC=y
 # CONFIG_SCSI_FUTURE_DOMAIN is not set
 # CONFIG_SCSI_GDTH is not set
 # CONFIG_SCSI_GENERIC_NCR5380 is not set
-# CONFIG_SCSI_GENERIC_NCR5380_MMIO is not set
 # CONFIG_SCSI_IPS is not set
 CONFIG_SCSI_INITIO=m
 # CONFIG_SCSI_INIA100 is not set
@@ -502,7 +495,6 @@ CONFIG_USB_OHCI_HCD=m
 ##
 CONFIG_DUMMY_CONSOLE_COLUMNS=160
 CONFIG_DUMMY_CONSOLE_ROWS=64
-CONFIG_FRAMEBUFFER_CONSOLE=y
 CONFIG_STI_CONSOLE=y
 
 ##
@@ -554,7 +546,8 @@ CONFIG_SYSFS_SYSCALL=y
 ## file: lib/Kconfig.debug
 ##
 CONFIG_DEBUG_STACKOVERFLOW=y
-# CONFIG_LOCKUP_DETECTOR is not set
+# CONFIG_SOFTLOCKUP_DETECTOR is not set
+# CONFIG_HARDLOCKUP_DETECTOR is not set
 
 ##
 ## file: mm/Kconfig
